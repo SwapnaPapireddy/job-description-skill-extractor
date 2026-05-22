@@ -1,22 +1,87 @@
-**Job Description (JD) Skill Extractor**
-Goal: Extract key information from any Job Description in a structured format using LLMs.
+AI-Powered-ChatBot-Langchain
+🏥 Hospital AI Chatbot
+An intelligent hospital assistant powered by Hugging Face Inference API and Retrieval-Augmented Generation (RAG). The chatbot answers general health queries, provides symptom guidance, and retrieves hospital-specific information directly from your PDF documents.
 
-This project focuses on solving a real-world recruitment problem using Large Language Models, LangChain, FastAPI, and intelligent resume analysis.
+Open in Spaces AI Hospital Chatbot
 
-The system automatically extracts:
-- Skills
-- Experience
-- Education
+✨ Features
+General query handling — answers common medical knowledge questions
+Symptom guidance — provides safe, informative responses to symptom-based queries
+Hospital information retrieval — fetches doctor details, timings, and hospital info from PDFs using RAG
+Conversation memory — maintains context across the session via Streamlit state
+Responsible AI — does not diagnose or prescribe; gives general and hospital information only
+🗂️ Project Structure
+image
+⚙️ How It Works
+User Query
+    │
+    ▼
+ Router (router.py)
+    │
+    ├── GENERAL ──────────────────────► Chat model → Answer
+    │
+    ├── PROBLEM ──────────────────────► Chat model (safe guidance) → Answer
+    │
+    └── HOSPITAL_INFO ────► PDF Chunks + FAISS (pdf_rag.py)
+                                 │
+                            Embeddings (hf_embeddings.py)
+                                 │
+                            Chat model (llm_client.py) → Answer
+🚀 Getting Started
+1. Create a Hugging Face Access Token
+Go to huggingface.co/settings/tokens and create a User Access Token with permission to call Inference Providers.
 
-from Job Descriptions and compares them with uploaded resumes to generate:
-- Match scores
-- Missing skills
-- Candidate suitability analysis
+2. Configure environment variables
+Create a .env file in the project root:
 
-The goal of this project is to help recruiters automate the resume screening process efficiently and reduce manual hiring effort using AI.
+HF_TOKEN=your_huggingface_token_here
+HF_CHAT_MODEL=meta-llama/Llama-3.1-8B-Instruct
+HF_EMBEDDING_MODEL=thenlper/gte-large
+HF_PROVIDER=hf-inference
+Notes:
 
-Let’s start the project demonstration.
-short_description: Extracts professional skills, keywords from job description
----
+HF_CHAT_MODEL must support chat completion on Hugging Face Inference Providers.
+HF_EMBEDDING_MODEL must support feature extraction / embeddings.
+If a model is unavailable for your provider, choose an alternative from its Hugging Face model page.
+3. Add your hospital PDFs
+Place your hospital documents inside the data/ folder. Recommended files:
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+File	Contents
+doctors.pdf	Doctor names, specialties, contact info
+timings.pdf	OPD and department schedules
+hospital_info.pdf	Location, facilities, departments
+4. Install dependencies
+pip install -r requirements.txt
+5. Run the app
+streamlit run app.py
+💬 Example Queries
+General questions
+
+What is fever?
+What are common causes of a cough?
+Symptom guidance
+
+I have a headache and fever.
+I feel dizzy and weak.
+Hospital information
+
+Who is the cardiologist?
+What is Dr. Ravi's timing?
+Where is the hospital located?
+Which doctor should I consult for a skin allergy?
+⚠️ Safety Disclaimer
+This chatbot is designed to provide general health information and hospital-specific details only.
+
+It does not diagnose medical conditions.
+It does not prescribe medication or treatment.
+Always consult a qualified medical professional for personal health concerns.
+🛠️ Tech Stack
+Component	Technology
+Frontend	Streamlit
+LLM	Hugging Face Inference API
+Embeddings	HuggingFace thenlper/gte-large
+Vector Store	FAISS
+PDF Parsing	LangChain / PyMuPDF
+RAG Framework	Custom pipeline
+📄 License
+This project is for educational and informational purposes only.
