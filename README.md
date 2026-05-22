@@ -1,14 +1,20 @@
----
-title: Job Description Skill Extractor
-emoji: 😻
-colorFrom: blue
-colorTo: red
-sdk: streamlit
-sdk_version: 1.45.0
-python_version: '3.13'
-app_file: app.py
-pinned: false
-license: apache-2.0
+“AI-Powered Resume Matcher and Job Description Skill Extractor.”
+
+This project focuses on solving a real-world recruitment problem using Large Language Models, LangChain, FastAPI, and intelligent resume analysis.
+
+The system automatically extracts:
+- Skills
+- Experience
+- Education
+
+from Job Descriptions and compares them with uploaded resumes to generate:
+- Match scores
+- Missing skills
+- Candidate suitability analysis
+
+The goal of this project is to help recruiters automate the resume screening process efficiently and reduce manual hiring effort using AI.
+
+Let’s start the project demonstration.
 short_description: Extracts professional skills, keywords from job description
 ---
 
