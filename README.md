@@ -1,4 +1,5 @@
-“AI-Powered Resume Matcher and Job Description Skill Extractor.”
+**Job Description (JD) Skill Extractor**
+Goal: Extract key information from any Job Description in a structured format using LLMs.
 
 This project focuses on solving a real-world recruitment problem using Large Language Models, LangChain, FastAPI, and intelligent resume analysis.
 
